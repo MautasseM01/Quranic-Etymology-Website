@@ -8,13 +8,14 @@ const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
+  fallback: ["system-ui", "arial"],
 })
 
 const notoSansArabic = Noto_Sans_Arabic({
   subsets: ["arabic"],
-  variable: "--font-noto-sans-arabic",
+  variable: "--font-arabic",
   display: "swap",
-  weight: ["300", "400", "500", "600", "700"],
+  fallback: ["system-ui", "arial"],
 })
 
 export const metadata: Metadata = {
@@ -53,7 +54,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#1e3a8a" />
       </head>
-      <body className={`${inter.variable} ${notoSansArabic.variable}`} suppressHydrationWarning>
+      <body className={`${inter.variable} ${notoSansArabic.variable} font-sans antialiased`} suppressHydrationWarning>
         {children}
       </body>
     </html>

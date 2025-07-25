@@ -63,22 +63,46 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-inter), sans-serif;
+    font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 
+  /* Arabic font styling with proper RTL support */
   .font-arabic {
-    font-family: var(--font-noto-sans-arabic), sans-serif;
+    font-family: var(--font-arabic), "Noto Sans Arabic", "Arabic UI Text", "SF Arabic", "Segoe UI Arabic", system-ui,
+      sans-serif;
+    line-height: 1.8;
+    letter-spacing: 0.02em;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   /* RTL Support */
   .rtl {
     direction: rtl;
+    text-align: right;
   }
 
   .ltr {
     direction: ltr;
+    text-align: left;
+  }
+
+  /* Arabic text specific styling */
+  .rtl .font-arabic {
+    unicode-bidi: embed;
+    direction: rtl;
+  }
+
+  /* Ensure proper Arabic number display */
+  .rtl .arabic-numbers {
+    direction: ltr;
+    unicode-bidi: embed;
   }
 
   /* Smooth transitions */
@@ -103,12 +127,6 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #94a3b8;
   }
-}
-
-/* Arabic text styling */
-.font-arabic {
-  line-height: 1.8;
-  letter-spacing: 0.02em;
 }
 
 /* Hover effects */
@@ -143,4 +161,135 @@ a:focus-visible {
 
 .animate-fade-in-up {
   animation: fadeInUp 0.6s ease-out;
+}
+
+/* Improved Arabic text rendering */
+.arabic-text {
+  font-family: var(--font-arabic), "Noto Sans Arabic", "Arabic UI Text", system-ui, sans-serif;
+  direction: rtl;
+  text-align: right;
+  line-height: 1.8;
+  word-spacing: 0.1em;
+}
+
+/* Mixed content (Arabic + English) */
+.mixed-content {
+  unicode-bidi: plaintext;
+}
+
+/* Ensure proper spacing for Arabic punctuation */
+.rtl .font-arabic {
+  word-spacing: 0.05em;
+}
+
+/* Enhanced Arabic Calligraphy */
+.arabic-calligraphy {
+  font-family: var(--font-arabic), "Noto Sans Arabic", "Arabic UI Text", system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mobile-first responsive design */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .arabic-text {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    line-height: 1.4;
+  }
+
+  /* Mobile search adjustments */
+  .mobile-search {
+    max-width: 100%;
+    margin: 0 1rem;
+  }
+
+  /* Mobile card spacing */
+  .mobile-card-grid {
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .arabic-text {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+  }
+}
+
+/* Enhanced loading animations */
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Search dropdown animations */
+.search-dropdown-enter {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.search-dropdown-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 200ms, transform 200ms;
+}
+
+/* Enhanced hover effects for cards */
+.word-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.word-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(30, 58, 138, 0.15);
+}
+
+/* Arabic keyboard support */
+.arabic-input {
+  unicode-bidi: plaintext;
+}
+
+.arabic-input:focus {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Loading spinner for Arabic context */
+.arabic-spinner {
+  border-right-color: transparent;
+}
+
+/* Enhanced focus states for accessibility */
+.focus-ring:focus-visible {
+  outline: 2px solid #f59e0b;
+  outline-offset: 2px;
+  border-radius: 0.375rem;
+}
+
+/* Smooth transitions for language switching */
+.language-transition {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Enhanced Islamic geometric patterns */
+.islamic-pattern {
+  background-image: radial-gradient(circle at 25% 25%, rgba(30, 58, 138, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(245, 158, 11, 0.1) 0%, transparent 50%);
 }

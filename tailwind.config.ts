@@ -94,8 +94,16 @@ const config: Config = {
         "fade-in-up": "fadeInUp 0.6s ease-out",
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "sans-serif"],
-        arabic: ["var(--font-noto-sans-arabic)", "sans-serif"],
+        sans: ["var(--font-inter)", "system-ui", "-apple-system", "sans-serif"],
+        arabic: [
+          "var(--font-arabic)",
+          "Noto Sans Arabic",
+          "Arabic UI Text",
+          "SF Arabic",
+          "Segoe UI Arabic",
+          "system-ui",
+          "sans-serif",
+        ],
       },
     },
   },
