@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { ThemeToggle } from "@/components/theme-toggle"
 import React from "react"
 
 export default function HomePage() {
@@ -140,18 +141,18 @@ export default function HomePage() {
 
   // Loading skeleton component
   const WordCardSkeleton = () => (
-    <Card className="border-blue-100 animate-pulse">
+    <Card className="border-blue-200 dark:border-blue-800 animate-pulse">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
-          <div className="h-6 bg-gray-200 rounded w-24"></div>
-          <div className="h-5 bg-gray-200 rounded w-12"></div>
+          <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-24"></div>
+          <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-12"></div>
         </div>
-        <div className="h-4 bg-gray-200 rounded w-32 mt-2"></div>
+        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-32 mt-2"></div>
       </CardHeader>
       <CardContent>
         <div className="flex items-center justify-between">
-          <div className="h-3 bg-gray-200 rounded w-20"></div>
-          <div className="h-8 bg-gray-200 rounded w-20"></div>
+          <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
+          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
         </div>
       </CardContent>
     </Card>
@@ -159,11 +160,11 @@ export default function HomePage() {
 
   return (
     <div
-      className={`min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 ${isArabic ? "rtl" : "ltr"}`}
+      className={`min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-blue-950 transition-colors duration-300 ${isArabic ? "rtl" : "ltr"}`}
       dir={isArabic ? "rtl" : "ltr"}
     >
       {/* Geometric Pattern Background */}
-      <div className="fixed inset-0 opacity-5 pointer-events-none">
+      <div className="fixed inset-0 opacity-5 dark:opacity-10 pointer-events-none">
         <div
           className="absolute inset-0"
           style={{
@@ -173,16 +174,18 @@ export default function HomePage() {
       </div>
 
       {/* Header */}
-      <header className="relative z-10 bg-white/80 backdrop-blur-sm border-b border-blue-100 sticky top-0">
+      <header className="relative z-10 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border-b border-blue-100 dark:border-blue-800 sticky top-0 transition-colors duration-300">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <div className="flex items-center space-x-3 rtl:space-x-reverse">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-800 to-blue-900 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-800 to-blue-900 dark:from-blue-600 dark:to-blue-700 rounded-lg flex items-center justify-center">
                 <BookOpen className="w-6 h-6 text-amber-400" />
               </div>
               <div>
-                <h1 className={`font-bold text-blue-900 ${isArabic ? "text-lg font-arabic" : "text-xl"}`}>
+                <h1
+                  className={`font-bold text-blue-900 dark:text-blue-100 transition-colors ${isArabic ? "text-lg font-arabic" : "text-xl"}`}
+                >
                   {currentContent.title}
                 </h1>
               </div>
@@ -191,18 +194,20 @@ export default function HomePage() {
             {/* Search Bar */}
             <div className="flex-1 max-w-md mx-8 relative">
               <div className="relative">
-                <Search className={`absolute top-3 w-4 h-4 text-gray-400 ${isArabic ? "right-3" : "left-3"}`} />
+                <Search
+                  className={`absolute top-3 w-4 h-4 text-gray-400 dark:text-gray-500 ${isArabic ? "right-3" : "left-3"}`}
+                />
                 <Input
                   type="text"
                   placeholder={currentContent.searchPlaceholder}
                   value={searchQuery}
                   onChange={(e) => handleSearch(e.target.value)}
-                  className={`w-full ${isArabic ? "pr-10 text-right font-arabic" : "pl-10"} bg-white/90 border-blue-200 focus:border-amber-400`}
+                  className={`w-full ${isArabic ? "pr-10 text-right font-arabic" : "pl-10"} bg-white/90 dark:bg-slate-800/90 border-blue-200 dark:border-blue-700 focus:border-amber-400 dark:focus:border-amber-500 text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 transition-colors`}
                   dir={isArabic ? "rtl" : "ltr"}
                 />
                 {isLoading && (
                   <div className={`absolute top-3 w-4 h-4 ${isArabic ? "left-3" : "right-3"}`}>
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600 dark:border-blue-400"></div>
                   </div>
                 )}
               </div>
@@ -210,21 +215,23 @@ export default function HomePage() {
               {/* Search Results Dropdown */}
               {showSearchResults && searchResults.length > 0 && (
                 <div
-                  className={`absolute top-full mt-1 w-full bg-white rounded-lg shadow-lg border border-blue-200 z-50 max-h-60 overflow-y-auto ${isArabic ? "text-right" : "text-left"}`}
+                  className={`absolute top-full mt-1 w-full bg-white dark:bg-slate-800 rounded-lg shadow-lg border border-blue-200 dark:border-blue-700 z-50 max-h-60 overflow-y-auto transition-colors ${isArabic ? "text-right" : "text-left"}`}
                 >
                   {searchResults.map((result, index) => (
                     <div
                       key={index}
-                      className="p-3 hover:bg-blue-50 cursor-pointer border-b border-blue-100 last:border-b-0"
+                      className="p-3 hover:bg-blue-50 dark:hover:bg-blue-900/20 cursor-pointer border-b border-blue-100 dark:border-blue-800 last:border-b-0 transition-colors"
                       onClick={() => {
                         setSearchQuery(result.word)
                         setShowSearchResults(false)
                       }}
                     >
-                      <div className={`font-semibold text-blue-900 ${isArabic ? "font-arabic text-lg" : ""}`}>
+                      <div
+                        className={`font-semibold text-blue-900 dark:text-blue-100 ${isArabic ? "font-arabic text-lg" : ""}`}
+                      >
                         {result.word}
                       </div>
-                      <div className={`text-sm text-gray-600 ${isArabic ? "font-arabic" : ""}`}>
+                      <div className={`text-sm text-gray-600 dark:text-gray-400 ${isArabic ? "font-arabic" : ""}`}>
                         {result.meaning} • {isArabic ? "الجذر:" : "Root:"} {result.root}
                       </div>
                     </div>
@@ -233,13 +240,14 @@ export default function HomePage() {
               )}
             </div>
 
-            {/* Language Toggle */}
+            {/* Controls */}
             <div className="flex items-center space-x-2 rtl:space-x-reverse">
+              <ThemeToggle />
               <Button
                 variant={language === "ar" ? "default" : "outline"}
                 size="sm"
                 onClick={() => setLanguage("ar")}
-                className="bg-blue-800 hover:bg-blue-900 text-white font-arabic"
+                className="bg-blue-800 hover:bg-blue-900 dark:bg-blue-700 dark:hover:bg-blue-600 text-white font-arabic transition-colors"
               >
                 العربية
               </Button>
@@ -247,7 +255,7 @@ export default function HomePage() {
                 variant={language === "en" ? "default" : "outline"}
                 size="sm"
                 onClick={() => setLanguage("en")}
-                className="bg-blue-800 hover:bg-blue-900 text-white"
+                className="bg-blue-800 hover:bg-blue-900 dark:bg-blue-700 dark:hover:bg-blue-600 text-white transition-colors"
               >
                 English
               </Button>
@@ -260,20 +268,20 @@ export default function HomePage() {
       <section className="relative z-10 py-20 px-4">
         <div className="container mx-auto text-center">
           <h2
-            className={`mb-6 text-blue-900 leading-tight ${isArabic ? "text-4xl md:text-6xl arabic-text font-bold" : "text-5xl md:text-7xl font-bold"}`}
+            className={`mb-6 text-blue-900 dark:text-blue-100 leading-tight transition-colors ${isArabic ? "text-4xl md:text-6xl arabic-text font-bold" : "text-5xl md:text-7xl font-bold"}`}
           >
             {currentContent.tagline}
           </h2>
           <p
-            className={`mb-12 text-gray-600 max-w-3xl mx-auto leading-relaxed ${isArabic ? "text-xl arabic-text" : "text-lg"}`}
+            className={`mb-12 text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed transition-colors ${isArabic ? "text-xl arabic-text" : "text-lg"}`}
           >
             {currentContent.description}
           </p>
 
           {/* Featured Word Card */}
-          <Card className="max-w-2xl mx-auto mb-16 bg-gradient-to-br from-blue-800 via-blue-900 to-indigo-900 text-white border-0 shadow-2xl overflow-hidden relative">
+          <Card className="max-w-2xl mx-auto mb-16 bg-gradient-to-br from-blue-800 via-blue-900 to-indigo-900 dark:from-blue-900 dark:via-slate-900 dark:to-indigo-950 text-white border-0 shadow-2xl overflow-hidden relative">
             {/* Decorative Islamic Pattern */}
-            <div className="absolute inset-0 opacity-10">
+            <div className="absolute inset-0 opacity-10 dark:opacity-20">
               <div
                 className="absolute inset-0"
                 style={{
@@ -285,7 +293,7 @@ export default function HomePage() {
             <CardHeader className="pb-4 relative z-10">
               <div className="text-center">
                 <div
-                  className={`mb-4 ${isArabic ? "text-7xl md:text-8xl arabic-text font-bold" : "text-6xl md:text-7xl font-bold"} text-amber-400 drop-shadow-lg`}
+                  className={`mb-4 ${isArabic ? "text-7xl md:text-8xl arabic-text font-bold" : "text-6xl md:text-7xl font-bold"} text-amber-400 dark:text-amber-300 drop-shadow-lg transition-colors`}
                   style={{
                     textShadow: "0 0 20px rgba(245, 158, 11, 0.3)",
                     fontWeight: "700",
@@ -296,7 +304,7 @@ export default function HomePage() {
                 </div>
                 <Badge
                   variant="secondary"
-                  className="bg-amber-400/20 text-amber-200 border-amber-400/30 arabic-numbers text-sm px-3 py-1"
+                  className="bg-amber-400/20 dark:bg-amber-500/20 text-amber-200 dark:text-amber-300 border-amber-400/30 dark:border-amber-500/30 arabic-numbers text-sm px-3 py-1 transition-colors"
                 >
                   {isArabic ? "الجذر:" : "Root:"} {currentContent.featuredWordRoot}
                 </Badge>
@@ -304,14 +312,14 @@ export default function HomePage() {
             </CardHeader>
             <CardContent className="relative z-10">
               <p
-                className={`${isArabic ? "font-arabic text-xl" : "text-lg"} text-blue-100 text-center leading-relaxed`}
+                className={`${isArabic ? "font-arabic text-xl" : "text-lg"} text-blue-100 dark:text-blue-200 text-center leading-relaxed transition-colors`}
               >
                 {currentContent.featuredWordMeaning}
               </p>
               <div className="mt-4 text-center">
                 <Button
                   variant="outline"
-                  className="bg-white/10 border-amber-400/50 text-amber-200 hover:bg-amber-400/20 hover:text-white transition-all duration-300"
+                  className="bg-white/10 dark:bg-white/5 border-amber-400/50 dark:border-amber-500/50 text-amber-200 dark:text-amber-300 hover:bg-amber-400/20 dark:hover:bg-amber-500/20 hover:text-white transition-all duration-300"
                 >
                   {isArabic ? "استكشف المزيد" : "Explore More"}
                 </Button>
@@ -322,55 +330,67 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section className="relative z-10 py-16 px-4 bg-white/50">
+      <section className="relative z-10 py-16 px-4 bg-white/50 dark:bg-slate-900/50 transition-colors duration-300">
         <div className="container mx-auto">
           <div className="grid md:grid-cols-3 gap-8">
             {/* Etymology Analysis */}
-            <Card className="text-center hover:shadow-lg transition-shadow duration-300 border-blue-100">
+            <Card className="text-center hover:shadow-lg dark:hover:shadow-2xl transition-all duration-300 border-blue-100 dark:border-blue-800 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
               <CardHeader>
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-800 to-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-800 to-blue-900 dark:from-blue-600 dark:to-blue-700 rounded-full flex items-center justify-center mx-auto mb-4 transition-colors">
                   <BookOpen className="w-8 h-8 text-amber-400" />
                 </div>
-                <CardTitle className={`text-blue-900 ${isArabic ? "font-arabic text-xl" : "text-lg"}`}>
+                <CardTitle
+                  className={`text-blue-900 dark:text-blue-100 transition-colors ${isArabic ? "font-arabic text-xl" : "text-lg"}`}
+                >
                   {currentContent.features.etymology.title}
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription className={`${isArabic ? "font-arabic text-base" : "text-sm"} text-gray-600`}>
+                <CardDescription
+                  className={`${isArabic ? "font-arabic text-base" : "text-sm"} text-gray-600 dark:text-gray-300 transition-colors`}
+                >
                   {currentContent.features.etymology.description}
                 </CardDescription>
               </CardContent>
             </Card>
 
             {/* Frequency Insights */}
-            <Card className="text-center hover:shadow-lg transition-shadow duration-300 border-blue-100">
+            <Card className="text-center hover:shadow-lg dark:hover:shadow-2xl transition-all duration-300 border-blue-100 dark:border-blue-800 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
               <CardHeader>
-                <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-amber-600 dark:from-amber-600 dark:to-amber-700 rounded-full flex items-center justify-center mx-auto mb-4 transition-colors">
                   <BarChart3 className="w-8 h-8 text-white" />
                 </div>
-                <CardTitle className={`text-blue-900 ${isArabic ? "font-arabic text-xl" : "text-lg"}`}>
+                <CardTitle
+                  className={`text-blue-900 dark:text-blue-100 transition-colors ${isArabic ? "font-arabic text-xl" : "text-lg"}`}
+                >
                   {currentContent.features.frequency.title}
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription className={`${isArabic ? "font-arabic text-base" : "text-sm"} text-gray-600`}>
+                <CardDescription
+                  className={`${isArabic ? "font-arabic text-base" : "text-sm"} text-gray-600 dark:text-gray-300 transition-colors`}
+                >
                   {currentContent.features.frequency.description}
                 </CardDescription>
               </CardContent>
             </Card>
 
             {/* Video Learning */}
-            <Card className="text-center hover:shadow-lg transition-shadow duration-300 border-blue-100">
+            <Card className="text-center hover:shadow-lg dark:hover:shadow-2xl transition-all duration-300 border-blue-100 dark:border-blue-800 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
               <CardHeader>
-                <div className="w-16 h-16 bg-gradient-to-br from-green-600 to-green-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-green-600 to-green-700 dark:from-green-700 dark:to-green-800 rounded-full flex items-center justify-center mx-auto mb-4 transition-colors">
                   <Play className="w-8 h-8 text-white" />
                 </div>
-                <CardTitle className={`text-blue-900 ${isArabic ? "font-arabic text-xl" : "text-lg"}`}>
+                <CardTitle
+                  className={`text-blue-900 dark:text-blue-100 transition-colors ${isArabic ? "font-arabic text-xl" : "text-lg"}`}
+                >
                   {currentContent.features.video.title}
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription className={`${isArabic ? "font-arabic text-base" : "text-sm"} text-gray-600`}>
+                <CardDescription
+                  className={`${isArabic ? "font-arabic text-base" : "text-sm"} text-gray-600 dark:text-gray-300 transition-colors`}
+                >
                   {currentContent.features.video.description}
                 </CardDescription>
               </CardContent>
@@ -383,7 +403,7 @@ export default function HomePage() {
       <section className="relative z-10 py-16 px-4">
         <div className="container mx-auto">
           <h3
-            className={`mb-12 text-center text-blue-900 ${isArabic ? "text-3xl md:text-4xl font-arabic font-bold" : "text-2xl md:text-3xl font-bold"}`}
+            className={`mb-12 text-center text-blue-900 dark:text-blue-100 transition-colors ${isArabic ? "text-3xl md:text-4xl font-arabic font-bold" : "text-2xl md:text-3xl font-bold"}`}
           >
             {currentContent.latestWords}
           </h3>
@@ -395,39 +415,39 @@ export default function HomePage() {
               : latestWords.map((word, index) => (
                   <Card
                     key={index}
-                    className="hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-blue-100 group cursor-pointer bg-white/80 backdrop-blur-sm"
+                    className="hover:shadow-xl dark:hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-blue-100 dark:border-blue-800 group cursor-pointer bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm"
                   >
                     <CardHeader className="pb-3">
                       <div className="flex items-center justify-between">
                         <CardTitle
-                          className={`text-blue-900 group-hover:text-blue-700 transition-colors ${isArabic ? "font-arabic text-xl md:text-2xl" : "text-lg md:text-xl"}`}
+                          className={`text-blue-900 dark:text-blue-100 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors ${isArabic ? "font-arabic text-xl md:text-2xl" : "text-lg md:text-xl"}`}
                         >
                           {word.word}
                         </CardTitle>
                         <Badge
                           variant="outline"
-                          className="text-amber-600 border-amber-400 arabic-numbers bg-amber-50 group-hover:bg-amber-100 transition-colors text-xs md:text-sm"
+                          className="text-amber-600 dark:text-amber-400 border-amber-400 dark:border-amber-500 arabic-numbers bg-amber-50 dark:bg-amber-900/20 group-hover:bg-amber-100 dark:group-hover:bg-amber-900/30 transition-colors text-xs md:text-sm"
                         >
                           {word.frequency}
                         </Badge>
                       </div>
                       <CardDescription
-                        className={`${isArabic ? "font-arabic text-sm md:text-base" : "text-sm"} text-gray-600 group-hover:text-gray-700 transition-colors`}
+                        className={`${isArabic ? "font-arabic text-sm md:text-base" : "text-sm"} text-gray-600 dark:text-gray-300 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors`}
                       >
                         {word.meaning}
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <div className="flex items-center justify-between text-xs md:text-sm text-gray-500">
+                      <div className="flex items-center justify-between text-xs md:text-sm text-gray-500 dark:text-gray-400">
                         <span
-                          className={`${isArabic ? "font-arabic" : ""} group-hover:text-gray-600 transition-colors`}
+                          className={`${isArabic ? "font-arabic" : ""} group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors`}
                         >
                           {isArabic ? "الجذر:" : "Root:"} {word.root}
                         </span>
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="text-blue-700 hover:text-blue-900 hover:bg-blue-50 transition-all duration-200 text-xs md:text-sm px-2 md:px-3"
+                          className="text-blue-700 dark:text-blue-300 hover:text-blue-900 dark:hover:text-blue-100 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-200 text-xs md:text-sm px-2 md:px-3"
                         >
                           {isArabic ? "اقرأ المزيد" : "Read More"}
                         </Button>
@@ -441,7 +461,7 @@ export default function HomePage() {
           <div className="text-center mt-8">
             <Button
               variant="outline"
-              className="bg-white border-blue-300 text-blue-700 hover:bg-blue-50 hover:border-blue-400 transition-all duration-300 px-6 py-2"
+              className="bg-white dark:bg-slate-800 border-blue-300 dark:border-blue-700 text-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:border-blue-400 dark:hover:border-blue-600 transition-all duration-300 px-6 py-2"
             >
               {isArabic ? "عرض المزيد من الكلمات" : "Load More Words"}
             </Button>
@@ -450,25 +470,29 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="relative z-10 bg-blue-900 text-white py-12 px-4">
+      <footer className="relative z-10 bg-blue-900 dark:bg-slate-900 text-white py-12 px-4 transition-colors duration-300">
         <div className="container mx-auto">
           <div className="grid md:grid-cols-3 gap-8 text-center">
             <div className="flex flex-col items-center">
-              <Award className="w-12 h-12 text-amber-400 mb-4" />
-              <h4 className={`font-semibold mb-2 ${isArabic ? "font-arabic text-lg" : ""}`}>
+              <Award className="w-12 h-12 text-amber-400 dark:text-amber-300 mb-4 transition-colors" />
+              <h4 className={`font-semibold mb-2 text-white ${isArabic ? "font-arabic text-lg" : ""}`}>
                 {currentContent.footer.academic}
               </h4>
-              <p className={`text-blue-200 ${isArabic ? "font-arabic" : "text-sm"}`}>
+              <p
+                className={`text-blue-200 dark:text-blue-300 transition-colors ${isArabic ? "font-arabic" : "text-sm"}`}
+              >
                 {isArabic ? "معتمد من الجامعات الإسلامية المرموقة" : "Endorsed by prestigious Islamic universities"}
               </p>
             </div>
 
             <div className="flex flex-col items-center">
-              <Users className="w-12 h-12 text-amber-400 mb-4" />
-              <h4 className={`font-semibold mb-2 ${isArabic ? "font-arabic text-lg" : ""}`}>
+              <Users className="w-12 h-12 text-amber-400 dark:text-amber-300 mb-4 transition-colors" />
+              <h4 className={`font-semibold mb-2 text-white ${isArabic ? "font-arabic text-lg" : ""}`}>
                 {currentContent.footer.scholars}
               </h4>
-              <p className={`text-blue-200 ${isArabic ? "font-arabic" : "text-sm"}`}>
+              <p
+                className={`text-blue-200 dark:text-blue-300 transition-colors ${isArabic ? "font-arabic" : "text-sm"}`}
+              >
                 {isArabic
                   ? "فريق من علماء اللغة العربية والدراسات القرآنية"
                   : "Team of Arabic language and Quranic studies scholars"}
@@ -476,18 +500,20 @@ export default function HomePage() {
             </div>
 
             <div className="flex flex-col items-center">
-              <Star className="w-12 h-12 text-amber-400 mb-4" />
-              <h4 className={`font-semibold mb-2 ${isArabic ? "font-arabic text-lg" : ""}`}>
+              <Star className="w-12 h-12 text-amber-400 dark:text-amber-300 mb-4 transition-colors" />
+              <h4 className={`font-semibold mb-2 text-white ${isArabic ? "font-arabic text-lg" : ""}`}>
                 {currentContent.footer.verified}
               </h4>
-              <p className={`text-blue-200 ${isArabic ? "font-arabic" : "text-sm"}`}>
+              <p
+                className={`text-blue-200 dark:text-blue-300 transition-colors ${isArabic ? "font-arabic" : "text-sm"}`}
+              >
                 {isArabic ? "محتوى مراجع ومدقق من قبل المختصين" : "Content reviewed and verified by specialists"}
               </p>
             </div>
           </div>
 
-          <div className="border-t border-blue-800 mt-8 pt-8 text-center">
-            <p className={`text-blue-200 ${isArabic ? "font-arabic" : "text-sm"}`}>
+          <div className="border-t border-blue-800 dark:border-slate-700 mt-8 pt-8 text-center transition-colors">
+            <p className={`text-blue-200 dark:text-blue-300 transition-colors ${isArabic ? "font-arabic" : "text-sm"}`}>
               {isArabic
                 ? `© ${new Date().getFullYear()} مستكشف علم الاشتقاق القرآني. جميع الحقوق محفوظة.`
                 : `© ${new Date().getFullYear()} Quranic Etymology Explorer. All rights reserved.`}

@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { Noto_Sans_Arabic } from "next/font/google"
+import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css"
 
 const inter = Inter({
@@ -55,7 +56,9 @@ export default function RootLayout({
         <meta name="theme-color" content="#1e3a8a" />
       </head>
       <body className={`${inter.variable} ${notoSansArabic.variable} font-sans antialiased`} suppressHydrationWarning>
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange={false}>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )
